@@ -1,57 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>Spectral Observatory Console</title>
 
 <style>
 body {
-    background:black;
-    color:#00ffee;
-    font-family:monospace;
-    text-align:center;
-    margin-top:100px;
+    background: black;
+    color: #00ffee;
+    font-family: monospace;
+    text-align: center;
+    margin-top: 100px;
 }
 
-#output {
-    font-size:24px;
-    filter: blur(20px) brightness(0);
+#signal {
+    font-size: 26px;
+    filter: blur(18px) brightness(0);
+    user-select: none;
 }
 
-button {
-    padding:10px;
-    background:#111;
-    color:#00ffee;
-    border:1px solid #00ffee;
+.note {
+    color: #888;
+    margin-top: 30px;
+    font-size: 14px;
 }
 </style>
 </head>
 
 <body>
 
-<h2>Deep Space Signal Console</h2>
-<p>Spectral filter engaged. Signal unreadable.</p>
+<h2>Deep Space Spectral Console</h2>
+<p>Signal detected — but blocked by spectral filter.</p>
 
-<div id="output">NO SIGNAL</div>
+<div id="signal">SIGNAL_PRESENT_BUT_FILTERED</div>
 
-<button onclick="applyFilter()">Re-run Filter</button>
+<div class="note">
+Engineers note: “Filters can hide truth, not erase it.”
+</div>
 
 <script>
 
-// flag pieces (base64 encoded)
-const p1 = "Q1RG";
-const p2 = "e3NwZWN0cmFs";
-const p3 = "X2ZpbHRlcl9v";
-const p4 = "ZmZ9";
+// --- encoded flag pieces ---
+const s1 = "Q1RG";
+const s2 = "e3NwZWN0cmFs";
+const s3 = "X2ZpbHRlcl9yZW1vdmVkfQ==";
 
-function applyFilter(){
-    document.getElementById("output").innerText = "SIGNAL BLOCKED";
+// hidden reveal function (not called anywhere)
+function unlockSignal() {
+    const raw = s1 + s2 + s3;
+    const flag = atob(raw);
+    document.getElementById("signal").style.filter = "none";
+    document.getElementById("signal").innerText = flag;
 }
 
-// hidden function — not called
-function revealSignal(){
-    const raw = p1+p2+p3+p4;
-    const flag = atob(raw);
-    document.getElementById("output").innerText = flag;
+// decoy function
+function recalibrate() {
+    console.log("Spectral filter recalibrated.");
 }
 
 </script>
