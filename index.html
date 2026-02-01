@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Spectral Observatory Console</title>
+
+<style>
+body {
+    background:black;
+    color:#00ffee;
+    font-family:monospace;
+    text-align:center;
+    margin-top:100px;
+}
+
+#output {
+    font-size:24px;
+    filter: blur(20px) brightness(0);
+}
+
+button {
+    padding:10px;
+    background:#111;
+    color:#00ffee;
+    border:1px solid #00ffee;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Deep Space Signal Console</h2>
+<p>Spectral filter engaged. Signal unreadable.</p>
+
+<div id="output">NO SIGNAL</div>
+
+<button onclick="applyFilter()">Re-run Filter</button>
+
+<script>
+
+// flag pieces (base64 encoded)
+const p1 = "Q1RG";
+const p2 = "e3NwZWN0cmFs";
+const p3 = "X2ZpbHRlcl9v";
+const p4 = "ZmZ9";
+
+function applyFilter(){
+    document.getElementById("output").innerText = "SIGNAL BLOCKED";
+}
+
+// hidden function — not called
+function revealSignal(){
+    const raw = p1+p2+p3+p4;
+    const flag = atob(raw);
+    document.getElementById("output").innerText = flag;
+}
+
+</script>
+
+</body>
+</html>
